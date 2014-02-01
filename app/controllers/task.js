@@ -13,7 +13,7 @@ var TaskController = Ember.ObjectController.extend({
     zpad: function(no, digits){
         no = no.toString();
         while(no.length < digits){
-            no = '0'+no
+            no = '0'+no;
         }
         return no;
     },
@@ -21,15 +21,15 @@ var TaskController = Ember.ObjectController.extend({
         var title = Ember.isEmpty(one);
         var author = Ember.isEmpty(two);
         var contents = Ember.isEmpty(three);
-        return title && author && contents
+        return title && author && contents;
     },
     onTick: function(){
         console.log("i'm the onyick listener and I'm getting called")
         var task = this.get('model');
         var e = this.getElapsed();
         var string = e.hours +":"+ e.minutes +":"+ e.seconds;
-        console.log(string)
-        task.set('time', string)
+        console.log(string);
+        task.set('time', string);
     },
     getElapsed: function(){
         console.log("I'm the get elapsed function that should be returning the time")
@@ -53,7 +53,7 @@ var TaskController = Ember.ObjectController.extend({
             minutes: this.zpad(mins, 2),
             seconds: this.zpad(secs, 2),
             milliseconds: ms
-        }
+        };
     },
     actions: {
         start: function(){
