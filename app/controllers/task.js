@@ -2,10 +2,8 @@ var TaskController = Ember.ObjectController.extend({
     oneHour: 1000 * 60 * 60,
     oneMin: 1000 * 60,
     oneSec: 1000,
+    started: false,
 
-    is_counting: function(){
-        return this.get('model').get('started') || false;
-    }.property('model.started'),
     display_time: function(){
         return this.get('model').get('display_time') || '00:00:00';
     }.property('model.display_time'),
@@ -39,7 +37,7 @@ var TaskController = Ember.ObjectController.extend({
         var task = this.get('model');
         // if the watch is stopped, use the date, else use now
         var elapsed = 0;
-        if(task.get('started')){
+        if(this.get('started')){
             elapsed = new Date().getTime() - task.get('startTime');
         }
 
@@ -62,18 +60,18 @@ var TaskController = Ember.ObjectController.extend({
         start: function(){
             var task = this.get('model');
             var delegate = function(that, method){ return function(){ return method.call(that)}};
-            if(!task.get('started')){
+            if(!this.get('started')){
                 task.set('startTime', new Date().getTime());
                 task.set('stopTime', 0);
-                task.set('started', true);
+                this.set('started', true);
                 task.set('tickInterval', setInterval(delegate(this, this.onTick), task.get('tickResolution')));
             }
         },
         stop: function(){
             var task = this.get('model');
-            if(task.get('started')){
+            if(this.get('started')){
                 task.set('stopTime', new Date().getTime());
-                task.set('started', false);
+                this.set('started', false);
                 var elapsed = task.get('stopTime') - task.get('startTime');
                 task.set('totalElapsed', this.get('totalElapsed') + elapsed);
                 if(task.get('tickInterval') != null){

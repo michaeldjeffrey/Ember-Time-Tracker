@@ -9,7 +9,6 @@ var Task = DS.Model.extend({
     startTime: attr(),
     stopTime: attr(),
     totalElapsed: attr('number', {defaultValue: 0}),
-    started: attr(),
     listener: attr(),
     tickResolution: attr('number', {defaultValue: 500}),
     tickInterval: attr(),
