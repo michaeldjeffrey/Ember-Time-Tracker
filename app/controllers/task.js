@@ -32,7 +32,7 @@ var TaskController = Ember.ObjectController.extend({
         var e = this.getElapsed();
         var string = e.hours +":"+ e.minutes +":"+ e.seconds;
         console.log(string);
-        task.set('time', string);
+        task.set('display_time', string);
         task.save();
     },
     getElapsed: function(){
@@ -44,7 +44,7 @@ var TaskController = Ember.ObjectController.extend({
         }
 
         elapsed += task.get('totalElapsed');
-        var hours = parseInt(elapsed / task.get('oneHour'));
+        var hours = parseInt(elapsed / this.get('oneHour'));
         elapsed %= this.get('oneHour');
         var mins = parseInt(elapsed / this.get('oneMin'));
         elapsed %= this.get('oneMin');
