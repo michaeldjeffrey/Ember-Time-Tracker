@@ -5,20 +5,22 @@ var Task = DS.Model.extend({
     title: attr(),
     author: attr(),
     contents: attr(),
+    date_created: attr(),
+    date_due: attr(),
 
-    startTime: attr(),
-    stopTime: attr(),
-    totalElapsed: attr('number', {defaultValue: 0}),
+    start_time: attr(),
+    stop_time: attr(),
+    total_elapsed: attr('number', {defaultValue: 0}),
     listener: attr(),
-    tickResolution: attr('number', {defaultValue: 500}),
-    tickInterval: attr(),
+    tick_resolution: attr('number', {defaultValue: 500}),
+    tick_interval: attr(),
     display_time: attr('string', {defaultValue: '00:00:00'}),
 
     // reset: function(){
-    //     this.set('totalElapsed', 0);
-    //     this.set('startTime', new Date().getTime());
-    //     this.set('stopTime', this.get('startTime'));
-    // }.property('totalElapsed', 'startTime', 'stopTime'),
+    //     this.set('total_elapsed', 0);
+    //     this.set('start_time', new Date().getTime());
+    //     this.set('stop_time', this.get('start_time'));
+    // }.property('total_elapsed', 'start_time', 'stop_time'),
 
     // restart: function(){
     //     this.stop();
@@ -28,11 +30,11 @@ var Task = DS.Model.extend({
 
     // setElapsed: function(hours, mins, secs){
     //     this.reset();
-    //     this.set('totalElapsed', 0);
-    //     this.set('totalElapsed', this.get('totalElapsed') + (hours * this.get('oneHour')));
-    //     this.set('totalElapsed', this.get('totalElapsed') + (mins * this.get('oneMin')));
-    //     this.set('totalElapsed', this.get('totalElapsed') + (secs * this.get('oneSec')));
-    //     this.set('totalElapsed', Math.max(this.get('totalElapsed'), 0));
+    //     this.set('total_elapsed', 0);
+    //     this.set('total_elapsed', this.get('total_elapsed') + (hours * this.get('oneHour')));
+    //     this.set('total_elapsed', this.get('total_elapsed') + (mins * this.get('oneMin')));
+    //     this.set('total_elapsed', this.get('total_elapsed') + (secs * this.get('oneSec')));
+    //     this.set('total_elapsed', Math.max(this.get('total_elapsed'), 0));
     // },
 
     // toString: function(){

@@ -38,10 +38,10 @@ var TaskController = Ember.ObjectController.extend({
         // if the watch is stopped, use the date, else use now
         var elapsed = 0;
         if(this.get('started')){
-            elapsed = new Date().getTime() - task.get('startTime');
+            elapsed = new Date().getTime() - task.get('start_time');
         }
 
-        elapsed += task.get('totalElapsed');
+        elapsed += task.get('total_elapsed');
         var hours = parseInt(elapsed / this.get('oneHour'));
         elapsed %= this.get('oneHour');
         var mins = parseInt(elapsed / this.get('oneMin'));
@@ -61,21 +61,21 @@ var TaskController = Ember.ObjectController.extend({
             var task = this.get('model');
             var delegate = function(that, method){ return function(){ return method.call(that)}};
             if(!this.get('started')){
-                task.set('startTime', new Date().getTime());
-                task.set('stopTime', 0);
+                task.set('start_time', new Date().getTime());
+                task.set('stop_time', 0);
                 this.set('started', true);
-                task.set('tickInterval', setInterval(delegate(this, this.onTick), task.get('tickResolution')));
+                task.set('tick_interval', setInterval(delegate(this, this.onTick), task.get('tick_resolution')));
             }
         },
         stop: function(){
             var task = this.get('model');
             if(this.get('started')){
-                task.set('stopTime', new Date().getTime());
+                task.set('stop_time', new Date().getTime());
                 this.set('started', false);
-                var elapsed = task.get('stopTime') - task.get('startTime');
-                task.set('totalElapsed', this.get('totalElapsed') + elapsed);
-                if(task.get('tickInterval') != null){
-                    clearInterval(this.get('tickInterval'));
+                var elapsed = task.get('stop_time') - task.get('start_time');
+                task.set('total_elapsed', this.get('total_elapsed') + elapsed);
+                if(task.get('tick_interval') != null){
+                    clearInterval(this.get('tick_interval'));
                 }
             }
         },
