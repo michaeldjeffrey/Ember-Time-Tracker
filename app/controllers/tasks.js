@@ -1,6 +1,6 @@
 var TasksController =  Ember.ArrayController.extend({
     itemController: 'task',
-    showForm: true,
+    showForm: false,
     date_created: new moment().format('MM/DD/YYYY'),
     actions: {
         add: function(){
