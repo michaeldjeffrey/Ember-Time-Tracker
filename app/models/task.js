@@ -13,7 +13,7 @@ var Task = DS.Model.extend({
     listener: attr(),
     tickResolution: attr('number', {defaultValue: 500}),
     tickInterval: attr(),
-
+    display_time: attr('string', {defaultValue: '00:00:00'}),
 
     // reset: function(){
     //     this.set('totalElapsed', 0);

@@ -6,9 +6,9 @@ var TaskController = Ember.ObjectController.extend({
     is_counting: function(){
         return this.get('model').get('started') || false;
     }.property('model.started'),
-    time: function(){
-        return this.get('model').get('time') || '00:00:00';
-    }.property('model.time'),
+    display_time: function(){
+        return this.get('model').get('display_time') || '00:00:00';
+    }.property('model.display_time'),
 
     bufferedTitle: Ember.computed.oneWay('title'),
     bufferedAuthor: Ember.computed.oneWay('author'),
@@ -33,6 +33,7 @@ var TaskController = Ember.ObjectController.extend({
         var string = e.hours +":"+ e.minutes +":"+ e.seconds;
         console.log(string);
         task.set('time', string);
+        task.save();
     },
     getElapsed: function(){
         var task = this.get('model');
