@@ -24,7 +24,6 @@ var TaskController = Ember.ObjectController.extend({
         return title && author && contents;
     },
     onTick: function(){
-        console.log("i'm the onyick listener and I'm getting called")
         var task = this.get('model');
         var e = this.getElapsed();
         var string = e.hours +":"+ e.minutes +":"+ e.seconds;
@@ -32,7 +31,6 @@ var TaskController = Ember.ObjectController.extend({
         task.set('time', string);
     },
     getElapsed: function(){
-        console.log("I'm the get elapsed function that should be returning the time")
         var task = this.get('model');
         // if the watch is stopped, use the date, else use now
         var elapsed = 0;
