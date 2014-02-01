@@ -14,9 +14,6 @@ var Task = DS.Model.extend({
     tickResolution: attr('number', {defaultValue: 500}),
     tickInterval: attr(),
 
-    oneHour: 1000 * 60 * 60,
-    oneMin: 1000 * 60,
-    oneSec: 1000,
 
     // reset: function(){
     //     this.set('totalElapsed', 0);

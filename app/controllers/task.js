@@ -1,4 +1,8 @@
 var TaskController = Ember.ObjectController.extend({
+    oneHour: 1000 * 60 * 60,
+    oneMin: 1000 * 60,
+    oneSec: 1000,
+
     is_counting: function(){
         return this.get('model').get('started') || false;
     }.property('model.started'),
@@ -40,11 +44,11 @@ var TaskController = Ember.ObjectController.extend({
 
         elapsed += task.get('totalElapsed');
         var hours = parseInt(elapsed / task.get('oneHour'));
-        elapsed %= task.get('oneHour');
-        var mins = parseInt(elapsed / task.get('oneMin'));
-        elapsed %= task.get('oneMin');
-        var secs = parseInt(elapsed / task.get('oneSec'));
-        var ms = elapsed % task.get('oneSec');
+        elapsed %= this.get('oneHour');
+        var mins = parseInt(elapsed / this.get('oneMin'));
+        elapsed %= this.get('oneMin');
+        var secs = parseInt(elapsed / this.get('oneSec'));
+        var ms = elapsed % this.get('oneSec');
 
         return {
             hours: this.zpad(hours, 2),
