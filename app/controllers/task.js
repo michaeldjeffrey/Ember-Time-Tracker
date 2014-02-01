@@ -1,9 +1,11 @@
 var TaskController = Ember.ObjectController.extend({
-    isEditing: false,
     time: '00:00:00',
     something: function(){
         console.log("At least I'm getting run")
         return 'something'
+    is_counting: function(){
+        return this.get('model').get('started') || false;
+    }.property('model.started'),
     },
     actions: {
         start: function(){

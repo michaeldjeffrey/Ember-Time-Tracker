@@ -7,13 +7,13 @@
                             <li class='list-group-item'>
                                 {{task-task task}} 
                                 <span class="pull-right">
-                                    {{#if isEditing}}
+                                    {{#if is_counting}}
                                         <button class='btn btn-default btn-xs' {{action 'stop'}}>Stop Timer</button>
                                     {{else}}
                                         <button class='btn btn-default btn-xs' {{action 'start'}}>Start Timer</button>
                                     {{/if}}
                                 </span>
-                                <span class='pull-right'>{{isEditing}}&emsp;&emsp;</span>
+                                <span class='pull-right'>{{is_counting}}&emsp;&emsp;</span>
                                 <span class="pull-right">{{time}}&emsp;</span>
                             </li>
                         {{/link-to}}
