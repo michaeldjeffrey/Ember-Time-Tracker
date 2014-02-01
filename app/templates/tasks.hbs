@@ -1,6 +1,6 @@
 <div id="container" class='container well'>
     <div class="row">
-        <div class="col-md-6">
+        <div class="col-sm-6">
             <ul class='list-group'>
                 {{#each task in controller}}
                         {{#link-to 'task' task}}
@@ -13,7 +13,7 @@
                                         <button class='btn btn-default btn-xs' {{action 'start'}}>Start Timer</button>
                                     {{/if}}
                                 </span>
-                                <span class='pull-right'>{{started}}&emsp;&emsp;</span>
+                                {{!-- <span class='pull-right'>{{started}}&emsp;&emsp;</span> --}}
                                 <span class="pull-right">{{display_time}}&emsp;</span>
                             </li>
                         {{/link-to}}
@@ -28,12 +28,12 @@
                 <div class="pull-right"><button {{action 'add'}} class="btn btn-default">Add Task</button></div>
             {{/if}}
         </div>
-        <div class="col-md-6">
+        <div class="col-sm-6">
             {{#if showForm}}
-                <h3>{{newTitle}}</h3>
-                <small> by: {{newAuthor}}</small>
+                <h3># {{newTitle}}</h3>
+                <small> by: {{newAuthor}}</small> <br><small>on: {{date_created}}</small>
                 <br>
-                <p>{{newContents}}</p>
+            <p> # {{newContents}}</p>
             {{else}}
                 {{outlet}}
             {{/if}}
@@ -42,8 +42,22 @@
 </div>
 {{#if showForm}}
     <div class="container well">
-        {{input value=newTitle class='form-control' placeholder='Title'}}
-        {{input value=newAuthor class='form-control' placeholder='Author'}}
+        <div class="row">
+            <div class="col-xs-4">
+                {{input value=newTitle class='form-control' placeholder='Title'}}
+            </div>
+            <div class="col-xs-3">
+                {{input value=newAuthor class='form-control' placeholder='Author'}}
+            </div>
+        </div><br>
+        <div class="row">
+            <div class="col-xs-3">
+                {{date-picker value=date_created placeholder='Date Created'}}
+            </div>
+            <div class="col-xs-3">
+                {{date-picker value=date_due placeholder='Date Due'}}
+            </div>
+        </div><br>
         {{textarea value=newContents class='form-control' placeholder='Contents...'}}
     </div>
 {{/if}}

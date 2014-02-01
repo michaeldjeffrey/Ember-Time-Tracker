@@ -79,47 +79,41 @@ var TaskController = Ember.ObjectController.extend({
                 }
             }
         },
-        // reset: function(){
-            // var task = this.get('model');
-            // task.set('totalElapsed', 0);
-            // task.set('startTime', new Date().getTime());
-            // task.set('stopTime', task.get('startTime'));
-        // },
-        // editTask: function(){
-            // this.set('isEditing', true);
-        // },
-        // doneEditing: function(){
-            // var bufferedTitle = this.get('bufferedTitle').trim();
-            // var bufferedAuthor = this.get('bufferedAuthor').trim();
-            // var bufferedContents = this.get('bufferedContents').trim();
-// 
-            // if(this.fieldIsEmpty(bufferedTitle, bufferedAuthor, bufferedContents)){
-                // Ember.run.debounce(this, this.send, 'removeTask', 0);
-            // } else {
-                // var task = this.get('model');
-                // task.set('title', bufferedTitle);
-                // task.set('author', bufferedAuthor);
-                // task.set('contents', bufferedContents);
-                // task.save();
-            // }
-// 
-            // this.set('bufferedTitle', bufferedTitle);
-            // this.set('bufferedAuthor', bufferedAuthor);
-            // this.set('bufferedContents', bufferedContents);
-            // this.set('isEditing', false);
-        // },
-        // cancelEditing: function(){
-            // this.set('bufferedTitle', this.get('title'));
-            // this.set('bufferedAuthor', this.get('author'));
-            // this.set('bufferedContents', this.get('contents'));
-            // this.set('isEditing', false);
-        // },
-        // removeTask: function(){
-            // var task = this.get('model');
-// 
-            // task.deleteRecord();
-            // task.save();
-        // }
+        editTask: function(){
+            this.set('isEditing', true);
+        },
+        doneEditing: function(){
+            var bufferedTitle = this.get('bufferedTitle').trim();
+            var bufferedAuthor = this.get('bufferedAuthor').trim();
+            var bufferedContents = this.get('bufferedContents').trim();
+
+            if(this.fieldIsEmpty(bufferedTitle, bufferedAuthor, bufferedContents)){
+                Ember.run.debounce(this, this.send, 'removeTask', 0);
+            } else {
+                var task = this.get('model');
+                task.set('title', bufferedTitle);
+                task.set('author', bufferedAuthor);
+                task.set('contents', bufferedContents);
+                task.save();
+            }
+
+            this.set('bufferedTitle', bufferedTitle);
+            this.set('bufferedAuthor', bufferedAuthor);
+            this.set('bufferedContents', bufferedContents);
+            this.set('isEditing', false);
+        },
+        cancelEditing: function(){
+            this.set('bufferedTitle', this.get('title'));
+            this.set('bufferedAuthor', this.get('author'));
+            this.set('bufferedContents', this.get('contents'));
+            this.set('isEditing', false);
+        },
+        removeTask: function(){
+            var task = this.get('model');
+
+            task.deleteRecord();
+            task.save();
+        }
     }
 })
 
