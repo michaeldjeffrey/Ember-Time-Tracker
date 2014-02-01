@@ -1,0 +1,39 @@
+<div id="container" class='container well'>
+    <div class="pull-right">
+        {{#if isEditing}}
+            <button class='btn btn-default btn-small' {{action 'done'}}>Save</button>
+        {{else}}
+            <button class='btn btn-default btn-small' {{action 'edit'}}>Edit</button>
+        {{/if}}
+    </div>
+
+    Name:<br>
+    {{#if isEditing}}
+        {{input value=firstname}}
+        {{input value=lastname}}<br>
+    {{/if}}
+        {{fullname}}
+    <br> <br>
+    Save On Enter: <br>
+    {{#if isEditing}}
+        {{input type="checkbox" name="isAdmin" checked=saveOnEnter}}
+    {{/if}}
+    {{saveOnEnterString}}
+
+    <br><br>
+    Storage: <br>
+    {{#if isEditing}}
+        {{view Ember.Select content=storageLocations value=storageLocation}} <br>
+    {{/if}}
+    {{storageLocation}}
+
+    {{#if usingFirebase}}
+        <br><br>
+        Fire Base URL: <br>
+        {{#if isEditing}}
+            {{input value=firebaseUrl}}
+        {{/if}}
+        {{firebaseUrl}}<br>
+    
+    {{/if}}
+</div>

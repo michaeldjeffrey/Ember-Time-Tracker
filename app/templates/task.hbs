@@ -1,0 +1,12 @@
+<h3>{{title}}</h3>
+<small> by: {{author}}</small>
+<br>
+<p>{{contents}}</p>
+<p>
+    {{#if started}}
+        <button {{action 'stop'}} class="btn btn-default">Stop</button>
+    {{else}}
+        <button {{action 'start'}} class="btn btn-default">Start</button>
+    {{/if}}
+</p>
+{{time}}

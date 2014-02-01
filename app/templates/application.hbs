@@ -1,0 +1,12 @@
+<nav class="navbar navbar-default" role="navigation">
+    <div class="navbar-header">
+        {{#link-to 'index' class='navbar-brand'}}Home{{/link-to}}
+        <ul class="nav navbar-nav">
+            <li>{{#link-to 'about'}}About{{/link-to}}</li>
+            <li>{{#link-to 'settings'}}Settings{{/link-to}}</li>
+            <li>{{#link-to 'tasks'}}Tasks{{/link-to}}</li>           
+        </ul>
+    </div>
+</nav>
+
+{{outlet}}

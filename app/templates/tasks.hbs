@@ -1,0 +1,52 @@
+<div id="container" class='container well'>
+    <div class="row">
+        <div class="col-md-6">
+            <ul class='list-group'>
+                {{#each task in controller}}
+                        {{#link-to 'task' task}}
+                            <li class='list-group-item'>
+                                {{task-task task}} 
+                                <span class="pull-right">
+                                    {{#if isEditing}}
+                                        <button class='btn btn-default btn-xs' {{action 'stop'}}>Stop Timer</button>
+                                    {{else}}
+                                        <button class='btn btn-default btn-xs' {{action 'start'}}>Start Timer</button>
+                                    {{/if}}
+                                </span>
+                                <span class='pull-right'>{{isEditing}}&emsp;&emsp;</span>
+                                <span class="pull-right">{{time}}&emsp;</span>
+                            </li>
+                        {{/link-to}}
+                {{else}}
+                    You need to create some Tasks
+                {{/each}}
+            </ul>
+            {{#if showForm}}
+                <div class="pull-right"><button {{action 'cancel'}} class="btn btn-default">Cancel</button></div>
+                <div class="pull-right"><button {{action 'createTask'}} class="btn btn-default">Save</button></div>
+            {{else}}
+                <div class="pull-right"><button {{action 'add'}} class="btn btn-default">Add Task</button></div>
+            {{/if}}
+        </div>
+        <div class="col-md-6">
+            {{#if showForm}}
+                <h3>{{newTitle}}</h3>
+                <small> by: {{newAuthor}}</small>
+                <br>
+                <p>{{newContents}}</p>
+            {{else}}
+                {{outlet}}
+            {{/if}}
+        </div>
+    </div>
+</div>
+{{#if showForm}}
+    <div class="container well">
+        {{input value=newTitle class='form-control' placeholder='Title'}}
+        {{input value=newAuthor class='form-control' placeholder='Author'}}
+        {{textarea value=newContents class='form-control' placeholder='Contents...'}}
+    </div>
+{{/if}}
+
+
+{{numCounting}}

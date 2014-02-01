@@ -1,0 +1,14 @@
+/* Put your CSS here */
+html, body {
+    margin-top: 10px;
+}
+a.active{
+    font-weight: bold;
+}
+.navbar{
+    margin: 0 20px 20px 20px;
+}
+
+@keyframes domChanged { from { background: yellow; } }
+@-webkit-keyframes domChanged { from { background: yellow; } }
+.ember-view { animation: domChanged 1s; -webkit-animation: domChanged 1s; }
