@@ -8,6 +8,8 @@ var Task = DS.Model.extend({
     date_created: attr(),
     date_due: attr(),
 
+    notes: DS.hasMany('task')
+
     start_time: attr(),
     stop_time: attr(),
     total_elapsed: attr('number', {defaultValue: 0}),
