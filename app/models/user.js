@@ -6,6 +6,9 @@ var User = DS.Model.extend({
     last_name: attr(),
     email: attr(),
     phone_number: attr(),
+    full_name: function(){
+        return this.get('first_name') + ' ' + this.get('last_name');
+    }.property('first_name', 'last_name'),
 
     //settings
     storage_type: attr(),
@@ -13,25 +16,7 @@ var User = DS.Model.extend({
     firebase_url: attr(),
 
     save_frequency: attr(),
-});
-
-User.reopenClass({
-    FIXTURES: [
-        {
-            id: '1',
-            username: 'migpok35',
-            first_name: 'Michael',
-            last_name: 'Jeffrey',
-            email: 'migpok35@gmail.com',
-            phone_number: '(480) 988-6841',
-
-            storage_type: 'local_storage',
-            firebase_user: false,
-            firebase_url: false,
-
-            save_frequency: 5000
-        }
-    ]
+    default_task_for: attr('string', {defaultValue: this.get('full_name') }),
 });
 
 export default User;
