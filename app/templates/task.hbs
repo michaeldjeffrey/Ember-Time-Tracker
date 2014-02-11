@@ -15,5 +15,5 @@
 {{/each}}
 <hr>
 {{comment}} <br>
-{{input value=comment}}
-<button {{action 'addRating' model}}>Add Note</button>
+{{input value=comment class='form-control' placeholder='Comment...' action='addRating'}} <br>
+{{!-- <button class='btn btn-default' {{action 'addRating' model}}>Add Note</button> --}}
