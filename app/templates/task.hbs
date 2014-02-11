@@ -10,3 +10,10 @@
     {{/if}}
 </p>
 {{time}}
+{{#each note in model.notes}}
+    {{note.note}} - <small><span class="text-muted">{{note.date}}, {{note.time}}</span></small> <br>
+{{/each}}
+<hr>
+{{comment}} <br>
+{{input value=comment}}
+<button {{action 'addRating' model}}>Add Note</button>
