@@ -5,7 +5,9 @@ Router.map(function() {
   this.route('helper-test');
   this.resource('about');
   this.resource('tasks', function(){
-    this.resource('task', {path: ':task_id'});
+    this.resource('task', {path: ':task_id'}, function(){
+        this.resource('notes', {path: '/notes'})
+    });
   });
   this.route('settings');
 });
