@@ -8,7 +8,7 @@ var Task = DS.Model.extend({
     date_created: attr(),
     date_due: attr(),
 
-    notes: DS.hasMany('task'),
+    notes: DS.hasMany('note', {async: true}),
 
     start_time: attr(),
     stop_time: attr(),
@@ -20,15 +20,7 @@ var Task = DS.Model.extend({
 })
 
 Task.reopenClass({
-    FIXTURES: [
-        {
-            id: '1',
-            title: 'First Post',
-            author: 'Michael Jeffrey',
-            contents: 'working on it',
-            date_created: '12.1.1'
-        }
-    ]
+    url: 'localhost/tasks'
 });
 
 export default Task
