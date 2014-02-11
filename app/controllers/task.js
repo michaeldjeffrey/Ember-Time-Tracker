@@ -60,6 +60,7 @@ var TaskController = Ember.ObjectController.extend({
     },
     actions: {
         addRating: function(parent){
+            var task = this.get('model');
             
             var text = this.get('comment');
             var date = moment().format("MM/DD/YYYY");
@@ -67,10 +68,9 @@ var TaskController = Ember.ObjectController.extend({
             if(text === undefined || text.trim() === ""){
                 return;
             }
-            var hash = {date: date, time: time, note: text};
+            var hash = {date: date, time: time, note: text, task: task};
             var note = this.store.createRecord('note', hash);
             
-            var task = this.get('model');
             var notes = task.get('notes');
             notes.pushObject(note);
             note.save();
