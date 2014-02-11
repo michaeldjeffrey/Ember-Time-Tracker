@@ -5,8 +5,6 @@ var Note = DS.Model.extend({
     time: attr(),
     note: attr(),
 
-    task: DS.belongsTo('task'),
-
     datetime: function(){
         return this.get('date') + ' ' + this.get('time');
     }.property('date', 'time')
