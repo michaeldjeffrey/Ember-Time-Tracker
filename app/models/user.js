@@ -21,6 +21,6 @@ var User = DS.Model.extend({
 
 User.reopen({
     url: 'localhost/users'
-})
+});
 
 export default User;

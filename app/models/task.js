@@ -17,10 +17,10 @@ var Task = DS.Model.extend({
     tick_resolution: attr('number', {defaultValue: 500}),
     tick_interval: attr(),
     display_time: attr('string', {defaultValue: '00:00:00'}),
-})
+});
 
 Task.reopenClass({
     url: 'localhost/tasks'
 });
 
-export default Task
+export default Task;

@@ -23,7 +23,7 @@ var TasksController =  Ember.ArrayController.extend({
                 return;
             }
 
-            console.log(title, author, contents)
+            console.log(title, author, contents);
 
             task = this.store.createRecord('task', {
                 title: title,
