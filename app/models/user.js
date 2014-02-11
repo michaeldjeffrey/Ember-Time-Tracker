@@ -19,4 +19,8 @@ var User = DS.Model.extend({
     default_task_for: attr('string', {defaultValue: this.get('full_name') }),
 });
 
+User.reopen({
+    url: 'localhost/users'
+})
+
 export default User;
