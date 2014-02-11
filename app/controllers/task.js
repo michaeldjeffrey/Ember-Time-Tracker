@@ -4,6 +4,8 @@ var TaskController = Ember.ObjectController.extend({
     oneSec: 1000,
     started: false,
 
+    comment: '',
+
     display_time: function(){
         return this.get('model').get('display_time') || '00:00:00';
     }.property('model.display_time'),
@@ -57,6 +59,26 @@ var TaskController = Ember.ObjectController.extend({
         };
     },
     actions: {
+        addRating: function(parent){
+            
+            var text = this.get('comment');
+            var date = moment().format("MM/DD/YYYY");
+            var time = moment().format("hh:mm:ss");
+            if(text === undefined || text.trim() === ""){
+                return;
+            }
+            var hash = {date: date, time: time, note: text};
+            var note = this.store.createRecord('note', hash);
+            
+            var task = this.get('model');
+            var notes = task.get('notes');
+            notes.pushObject(note);
+            note.save();
+            task.save();
+
+            this.set('comment', '');
+            
+        },
         start: function(){
             var task = this.get('model');
             var delegate = function(that, method){ return function(){ return method.call(that)}};
