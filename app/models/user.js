@@ -16,7 +16,6 @@ var User = DS.Model.extend({
     firebase_url: attr(),
 
     save_frequency: attr(),
-    default_task_for: attr('string', {defaultValue: this.get('full_name') }),
 });
 
 User.reopen({
