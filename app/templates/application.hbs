@@ -15,12 +15,16 @@
                 <li>{{#link-to 'settings'}}Settings{{/link-to}}</li>
                 <li>{{#link-to 'tasks'}}Tasks{{/link-to}}</li>           
             </ul>
-            {{#if is_counting}}
+            {{#if started}}
                 <button class="btn btn-default navbar-btn navbar-right" {{action 'stop'}}> Stop </button>
             {{else}}
                 <button class="btn btn-default navbar-btn navbar-right" {{action 'start'}}> Start </button>
             {{/if}}
-            <p class="navbar-text navbar-right">{{duration_display}} worked today &emsp;</p>
+            <p class="navbar-text navbar-right">
+                {{first_name}}, you have worked 
+                <em>{{display_hours}}</em> <b>hours</b> <em>{{display_minutes}}</em> <b>minutes</b> and <em>{{display_seconds}}</em> <b>seconds</b>
+                today &emsp;
+            </p>
         </div>
     </div>
 </nav>
