@@ -3,9 +3,18 @@ var ApplicationController = Ember.ObjectController.extend({
     oneMin: 1000 * 60,
     oneSec: 1000,
     started: false,
-    duration_display: function(){
-        return '00:00:00';
-    }.property('time'),
+    tick_resolution: 500,
+    tick_interval: null,
+    total_elapsed: 0,
+    display_hours: function(){
+        return moment.duration(this.get('display_time')).hours() || '0';
+    }.property('display_time'),
+    display_minutes: function(){
+        return moment.duration(this.get('display_time')).minutes() || '0';
+    }.property('display_time'),
+    display_seconds: function(){
+        return moment.duration(this.get('display_time')).seconds() || '0';
+    }.property('display_time'),
     zpad: function(no, digits){
         no = no.toString();
         while(no.length < digits){
@@ -14,19 +23,17 @@ var ApplicationController = Ember.ObjectController.extend({
         return no;
     },
     onTick: function(){
-        var timer = this.get('model');
         var e = this.getElapsed();
+        console.log(e)
         var string = e.hours +':'+ e.minutes +':'+ e.seconds;
-        timer.set('display_time', string);
-        timer.save();
+        this.set('display_time', string);
     },
     getElapsed: function(){
-        var timer = this.get('model');
         var elapsed = 0;
         if(this.get('started')){
-            elapsed = new Date().getTime() - timer.get('start_time');
+            elapsed = new Date().getTime() - this.get('start_time');
         }
-        elapsed += timer.get('total_elapsed');
+        elapsed += this.get('total_elapsed');
         var hours = parseInt(elapsed / this.get('oneHour'));
         elapsed %= this.get('oneHour');
         var mins = parseInt(elapsed / this.get('oneMin'));
@@ -36,10 +43,32 @@ var ApplicationController = Ember.ObjectController.extend({
 
         return {
             hours: this.zpad(hours, 2),
-            minutes: this.zpad(min, 2),
-            seconds: this.zpad(sec, 2),
+            minutes: this.zpad(mins, 2),
+            seconds: this.zpad(secs, 2),
             milliseconds: this.zpad(ms, 2),
         };
+    },
+    actions: {
+        start: function(){
+            var delegate = function(that, method){ return function(){ return method.call(that)}};
+            if(!this.get('started')){
+                this.set('start_time', new Date().getTime());
+                this.set('stop_time', 0);
+                this.set('started', true);
+                this.set('tick_interval', setInterval(delegate(this, this.onTick), this.get('tick_resolution')));
+            }
+        },
+        stop: function(){
+            if(this.get('started')){
+                this.set('stop_time', new Date().getTime());
+                this.set('started', false);
+                var elapsed = this.get('stop_time') - this.get('start_time');
+                this.set('total_elapsed', this.get('total_elapsed') + elapsed);
+                if(this.get('tick_interval') != null){
+                    clearInterval(this.get('tick_interval'));
+                }
+            }
+        }
     }
 });
 
